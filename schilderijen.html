@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Els Zumpolle - Schilderijen</title>
+    <link rel="stylesheet" href="portfolio-style.css">
+</head>
+<body data-portfolio-mode="all">
+    <header class="top-nav">
+        <div class="top-nav-brand">
+            <a href="index.html">ELS ZUMPOLLE</a>
+        </div>
+        <nav class="top-nav-links">
+            <a href="schilderijen.html" class="active">Schilderijen</a>
+            <a href="over-els.html">Over Els</a>
+            <a href="opdrachten.html">Opdrachten</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+
+    <main class="portfolio-main">
+        <section class="portfolio-intro">
+            <h1>Alle werken</h1>
+        </section>
+
+        <section class="portfolio-filters" aria-label="Filter schilderijen">
+            <div class="filter-control">
+                <span>Maat</span>
+                <div class="custom-dropdown" id="sizeDropdown">
+                    <button type="button" class="dropdown-trigger" aria-expanded="false">Alle maten</button>
+                    <div class="dropdown-panel">
+                        <label class="dropdown-option"><input type="checkbox" value="small"> Klein (tot 60 cm)</label>
+                        <label class="dropdown-option"><input type="checkbox" value="medium"> Middel (61-100 cm)</label>
+                        <label class="dropdown-option"><input type="checkbox" value="large"> Groot (101 cm en groter)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filter-control">
+                <span>Kleur</span>
+                <div class="custom-dropdown" id="colorDropdown">
+                    <button type="button" class="dropdown-trigger" aria-expanded="false">Alle kleuren</button>
+                    <div class="dropdown-panel" id="colorPanel"></div>
+                </div>
+            </div>
+
+            <div class="filter-control">
+                <span>Thema</span>
+                <div class="custom-dropdown" id="themeDropdown">
+                    <button type="button" class="dropdown-trigger" aria-expanded="false">Alle thema's</button>
+                    <div class="dropdown-panel" id="themePanel"></div>
+                </div>
+            </div>
+
+            <button id="resetFilters" class="filter-reset-btn">Filters wissen</button>
+        </section>
+
+        <p class="portfolio-results" id="portfolio-results"></p>
+
+        <div class="portfolio-grid" id="portfolio-grid">
+            <!-- Portfolio items will be loaded dynamically from portfolio.json -->
+        </div>
+
+        <footer class="page-footer">
+            <p><span>Copyright © 2026</span></p>
+        </footer>
+    </main>
+
+    <a href="#" class="back-to-top" id="backToTop">↑</a>
+
+    <div class="fullscreen-modal" id="fullscreenModal">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <button class="fullscreen-nav fullscreen-prev" onclick="showPrevious()">‹</button>
+        <button class="fullscreen-nav fullscreen-next" onclick="showNext()">›</button>
+        <div class="fullscreen-content">
+            <img id="fullscreenImage" class="fullscreen-image" src="" alt="">
+            <div class="fullscreen-caption" id="fullscreenCaption">
+                <div class="caption-title" id="captionTitle"></div>
+                <div class="caption-size" id="captionSize"></div>
+                <a id="viewInRoomModalBtn" class="view-in-room-modal-btn" href="#">Bekijk in kamer</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="portfolio-script.js"></script>
+</body>
+</html>
