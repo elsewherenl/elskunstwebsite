@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art in Room Viewer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="room-viewer-style.css">
+</head>
+<body>
+    <main class="container">
+        <!-- Viewer Section -->
+        <section class="viewer-section" aria-labelledby="artworkTitle">
+            <!-- Room Mockup View -->
+            <div class="room-mockup" id="roomMockup" aria-hidden="false">
+                <img src="" alt="Room interior" class="room-image is-active" id="roomImageA">
+                <img src="" alt="" class="room-image" id="roomImageB" aria-hidden="true">
+                <div class="artwork-frame" id="artworkFrame">
+                    <div class="artwork-mat" id="artworkMat">
+                        <img src="" alt="Artwork" class="artwork-image" id="artworkImage">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flat Artwork View (hidden by default) -->
+            <div class="artwork-solo is-hidden" id="artworkSolo" aria-hidden="true">
+                <img src="" alt="Artwork" class="artwork-image-solo" id="artworkImageSolo">
+            </div>
+
+            <!-- View Toggle Controls -->
+            <div class="view-controls" role="group" aria-label="Viewer mode">
+                <button type="button" class="toggle-btn active" id="viewInRoomBtn" aria-pressed="true">View in Room</button>
+                <button type="button" class="toggle-btn" id="viewArtworkBtn" aria-pressed="false">View Artwork</button>
+            </div>
+
+            <p class="viewer-status" id="viewerStatus" role="status" aria-live="polite">Loading artworks...</p>
+
+            <!-- Fit Mode Switcher - Removed -->
+            <div class="fit-mode-switcher" id="fitModeSwitcher" style="display: none;">
+                <button type="button" class="fit-btn active" data-fit-mode="accurate" id="fitAccurateBtn">Gallery Accurate</button>
+            </div>
+
+            <!-- Room Switcher (if multiple rooms) -->
+            <div class="room-switcher" id="roomSwitcher">
+                <!-- Room buttons will be inserted here by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Artwork Details Section -->
+        <section class="details-section">
+            <h1 class="artwork-title" id="artworkTitle">Artwork Title</h1>
+
+            <div class="artwork-details">
+                <div class="detail-item">
+                    <span class="detail-label">Medium</span>
+                    <span class="detail-value" id="artworkMedium">—</span>
+                </div>
+
+                <div class="detail-item">
+                    <span class="detail-label">Dimensions</span>
+                    <span class="detail-value" id="artworkDimensions">—</span>
+                </div>
+
+                <div class="detail-item">
+                    <span class="detail-label">Price</span>
+                    <span class="detail-value price" id="artworkPrice">—</span>
+                </div>
+
+                <div class="detail-item">
+                    <span class="detail-label">Availability</span>
+                    <span class="detail-value" id="artworkAvailability">—</span>
+                </div>
+            </div>
+
+            <!-- Artwork Selector -->
+            <div class="artwork-selector">
+                <label for="artworkSelect" class="selector-label">Select Artwork</label>
+                <select id="artworkSelect" class="artwork-dropdown" aria-describedby="viewerStatus">
+                    <option value="">Loading artworks...</option>
+                </select>
+            </div>
+        </section>
+    </main>
+
+    <!-- Scripts -->
+    <script src="room-config.js"></script>
+    <script src="room-scaling.js"></script>
+    <script src="room-viewer-script-simple.js"></script>
+</body>
+</html>
