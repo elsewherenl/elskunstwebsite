@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Els Zumpolle - Contact</title>
+    <link rel="stylesheet" href="portfolio-style.css">
+</head>
+<body>
+    <header class="top-nav">
+        <div class="top-nav-brand">
+            <a href="index.html">ELS ZUMPOLLE</a>
+        </div>
+        <nav class="top-nav-links">
+            <a href="schilderijen.html">Schilderijen</a>
+            <a href="over-els.html">Over Els</a>
+            <a href="opdrachten.html">Opdrachten</a>
+            <a href="contact.html" class="active">Contact</a>
+        </nav>
+    </header>
+
+
+    <main class="contact-main">
+        <section class="contact-panel">
+            <h1>Contact</h1>
+            <p class="contact-copy">Neem gerust contact op via het formulier hieronder.</p>
+
+            <form action="https://formspree.io/f/xaqljeep" method="POST" class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="naam">Naam</label>
+                    <input type="text" id="naam" name="naam" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="onderwerp">Onderwerp</label>
+                    <input type="text" id="onderwerp" name="onderwerp">
+                </div>
+                <div class="form-group">
+                    <label for="bericht">Bericht</label>
+                    <textarea id="bericht" name="bericht" rows="6" required></textarea>
+                </div>
+                <button type="submit" class="form-submit">Verstuur</button>
+            </form>
+            <p id="formSuccess" style="display:none; margin-top:1.5rem; color:#2f2a27;">Bedankt voor uw bericht! We nemen zo snel mogelijk contact met u op.</p>
+            <p id="formError" style="display:none; margin-top:1.5rem; color:#95392E;">Er is iets misgegaan. Probeer het opnieuw of stuur een e-mail naar <a href="mailto:ezumpollekunst@gmail.com">ezumpollekunst@gmail.com</a>.</p>
+
+            <script>
+                const form = document.getElementById('contactForm');
+                form.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const data = new FormData(form);
+                    const response = await fetch(form.action, {
+                        method: 'POST',
+                        body: data,
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    if (response.ok) {
+                        form.style.display = 'none';
+                        document.getElementById('formSuccess').style.display = 'block';
+                    } else {
+                        document.getElementById('formError').style.display = 'block';
+                    }
+                });
+            </script>
+        </section>
+    </main>
+
+    <footer class="page-footer">
+        <p><span>Copyright © 2026</span></p>
+    </footer>
+
+    <a href="#" class="back-to-top" id="backToTop">↑</a>
+
+    <script src="portfolio-script.js"></script>
+</body>
+</html>
