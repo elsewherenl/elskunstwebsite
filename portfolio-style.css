@@ -309,12 +309,12 @@ body {
 .page-footer {
     text-align: left;
     padding: 3rem 60px;
-    color: #5a7e96; /* Muted slate blue */
+    color: #7a6e65; /* Muted slate blue */
     font-size: 0.9rem;
 }
 
 .page-footer span {
-    color: #5a7e96;
+    color: #7a6e65;
 }
 
 /* Figure Captions - Overlay Style */
@@ -714,7 +714,7 @@ figcaption .overlay-size {
 
 .portfolio-main .portfolio-results {
     margin-top: 18px;
-    color: #5a7e96;
+    color: #7a6e65;
     font-size: 0.95rem;
 }
 
@@ -770,7 +770,7 @@ figcaption .overlay-size {
 
 .about-lead {
     max-width: 62ch;
-    color: #5a7e96;
+    color: #7a6e65;
     font-size: 1.05rem;
     line-height: 1.65;
 }
@@ -851,7 +851,7 @@ figcaption .overlay-size {
 
 .contact-copy,
 .contact-line {
-    color: #5a7e96;
+    color: #7a6e65;
     line-height: 1.65;
     font-size: 1.05rem;
 }
