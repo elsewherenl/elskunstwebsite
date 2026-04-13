@@ -460,18 +460,27 @@ figcaption .overlay-size {
     justify-content: center;
     padding: 0.65rem 1.25rem;
     border-radius: 999px;
-    border: 1.5px solid #FFFFFF;
+    border: 1.5px solid #95392E;
+    background: #95392E;
     color: #FFFFFF;
     text-decoration: none;
     letter-spacing: 0.03em;
     transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+    animation: pulse-room 2s ease-in-out 3;
 }
 
 .view-in-room-modal-btn:hover,
 .view-in-room-modal-btn:focus-visible {
-    background: #95392E;
-    border-color: #95392E;
+    background: #7D2F25;
+    border-color: #7D2F25;
     outline: none;
+    animation: none;
+}
+
+@keyframes pulse-room {
+    0%   { box-shadow: 0 0 0 0 rgba(149, 57, 46, 0.55); }
+    60%  { box-shadow: 0 0 0 8px rgba(149, 57, 46, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(149, 57, 46, 0); }
 }
 
 .close-modal {
