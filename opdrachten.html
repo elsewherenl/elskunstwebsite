@@ -26,9 +26,9 @@
                 <h1 class="opdrachten-title">Opdrachten</h1>
                 <p class="about-lead">Door de jaren heen ben ik vaak gevraagd een schilderij te maken van dierbare plaatsen, huizen, dieren en geliefden. Dit doe ik altijd met veel plezier!</p>
                 <p><strong>Hoe gaat dit in zijn werk?</strong></p>
-                <p>We bepalen samen het onderwerp (vaak een foto die ik naschilder), het doek, de soort verf, stijl en de grootte. Op basis daarvan bepalen we een prijs. Ga uit van €500 tot €1500. Het doek mag je ook zelf aanleveren.</p>
+                <p>We bepalen samen het onderwerp (vaak naar een foto), het doek, de soort verf, stijl en de grootte. Op basis daarvan bepalen we een prijs. Ga uit van €500 tot €1500. Het doek mag je ook zelf aanleveren.</p>
                 <p>Vanaf het moment van opdracht tot oplevering zit ongeveer een tijdsframe van 1–3 maanden. Tot slot kan het werk worden opgehaald in Blaricum.</p>
-                <p>Interesse? Neem contact op via de <a href="contact.html" style="color:#95392E;">contactpagina</a>, dan neem ik snel contact op.</p>
+                <p>Interesse? Stuur een berichtje op <a href="mailto:ezumpollekunst@gmail.com" style="color:#95392E;">ezumpollekunst@gmail.com</a>.</p>
             </div>
 
             <div class="opdrachten-grid">
@@ -72,5 +72,22 @@
     <a href="#" class="back-to-top" id="backToTop">↑</a>
 
     <script src="portfolio-script.js"></script>
+    <script>
+        const grid = document.querySelector('.opdrachten-grid');
+        const items = Array.from(grid.querySelectorAll('.portfolio-item'));
+        for (let i = items.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [items[i], items[j]] = [items[j], items[i]];
+        }
+        grid.innerHTML = '';
+        const row1 = document.createElement('div');
+        row1.className = 'opdrachten-row-2';
+        const row2 = document.createElement('div');
+        row2.className = 'opdrachten-row-3';
+        items.slice(0, 2).forEach(item => row1.appendChild(item));
+        items.slice(2).forEach(item => row2.appendChild(item));
+        grid.appendChild(row1);
+        grid.appendChild(row2);
+    </script>
 </body>
 </html>
