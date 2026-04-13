@@ -102,6 +102,16 @@ function parseRoomDisplayDimensions(sizeStr, artwork) {
     };
 }
 
+function getPriceBucket(priceStr) {
+    if (!priceStr) return 'unknown';
+    const num = parseFloat(String(priceStr).replace(/[^0-9.]/g, ''));
+    if (isNaN(num)) return 'unknown';
+    if (num < 100) return 'low';
+    if (num <= 250) return 'mid';
+    if (num <= 500) return 'high';
+    return 'top';
+}
+
 function getSizeBucket(sizeStr) {
     const { longestSide } = parseDimensions(sizeStr);
     if (!longestSide) return 'unknown';
@@ -141,7 +151,7 @@ function ensureModalViewButton() {
         button.id = 'viewInRoomModalBtn';
         button.className = 'view-in-room-modal-btn';
         button.href = '#';
-        button.textContent = 'View in Room';
+        button.textContent = 'Bekijk in kamer';
         caption.appendChild(button);
     }
 
@@ -280,7 +290,7 @@ function setGalleryViewMode(mode) {
     }
 
     if (button) {
-        button.textContent = galleryViewMode === 'room' ? 'View Artwork' : 'View in Room';
+        button.textContent = galleryViewMode === 'room' ? 'Bekijk schilderij' : 'Bekijk in kamer';
         button.setAttribute('aria-pressed', String(galleryViewMode === 'room'));
     }
 }
@@ -409,12 +419,14 @@ function applyPortfolioFilters() {
     const sizeValues = getCheckedValues('sizeDropdown');
     const colourValues = getCheckedValues('colorDropdown');
     const themeValues = getCheckedValues('themeDropdown');
+    const priceValues = getCheckedValues('priceDropdown');
 
     const filtered = allPortfolioArtworks.filter(artwork => {
         const sizeMatch = sizeValues.length === 0 || sizeValues.includes(getSizeBucket(artwork['Maat (HxB) in cm']));
         const colourMatch = colourValues.length === 0 || colourValues.some(c => getArtworkColours(artwork.Kleuren).includes(c));
         const themeMatch = themeValues.length === 0 || themeValues.includes(String(artwork.Thema || '').trim());
-        return sizeMatch && colourMatch && themeMatch;
+        const priceMatch = priceValues.length === 0 || priceValues.includes(getPriceBucket(artwork.Prijs));
+        return sizeMatch && colourMatch && themeMatch && priceMatch;
     });
 
     renderPortfolioGrid(filtered);
@@ -448,6 +460,7 @@ function setupPortfolioFilters() {
     setupCustomDropdown('sizeDropdown', 'Alle maten');
     setupCustomDropdown('colorDropdown', 'Alle kleuren');
     setupCustomDropdown('themeDropdown', "Alle thema's");
+    setupCustomDropdown('priceDropdown', 'Alle prijzen');
 
     document.addEventListener('click', () => {
         document.querySelectorAll('.custom-dropdown.open').forEach(d => {
@@ -459,7 +472,7 @@ function setupPortfolioFilters() {
     const resetBtn = document.getElementById('resetFilters');
     if (resetBtn && !resetBtn.dataset.bound) {
         resetBtn.addEventListener('click', () => {
-            ['sizeDropdown', 'colorDropdown', 'themeDropdown'].forEach(id => {
+            ['sizeDropdown', 'colorDropdown', 'themeDropdown', 'priceDropdown'].forEach(id => {
                 const dropdown = document.getElementById(id);
                 if (!dropdown) return;
                 dropdown.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
@@ -467,6 +480,7 @@ function setupPortfolioFilters() {
             updateDropdownLabel('sizeDropdown', 'Alle maten');
             updateDropdownLabel('colorDropdown', 'Alle kleuren');
             updateDropdownLabel('themeDropdown', "Alle thema's");
+            updateDropdownLabel('priceDropdown', 'Alle prijzen');
             history.replaceState(null, '', window.location.pathname);
             applyPortfolioFilters();
         });
