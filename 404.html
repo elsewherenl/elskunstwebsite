@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <script>
+        // GitHub Pages clean URL handler for static HTML pages.
+        (function() {
+            const path = window.location.pathname;
+            const cleanPath = path.replace(/\/$/, "");
+            const fallbackPath = "/schilderijen";
+
+            // Map clean URLs to physical files.
+            const routes = {
+                "/schilderijen": "/schilderijen.html",
+                "/over-els": "/over-els.html",
+                "/opdrachten": "/opdrachten.html",
+                "/contact": "/contact.html"
+            };
+
+            if (cleanPath === "" || cleanPath === "/") {
+                window.location.replace(fallbackPath);
+                return;
+            }
+
+            const targetFile = routes[cleanPath];
+            if (!targetFile) {
+                window.location.replace(fallbackPath);
+                return;
+            }
+
+            fetch(targetFile)
+                .then(function(response) {
+                    if (!response.ok) {
+                        throw new Error("Route target not found");
+                    }
+                    return response.text();
+                })
+                .then(function(html) {
+                    document.open();
+                    document.write(html);
+                    document.close();
+                    history.replaceState(null, "", cleanPath);
+                })
+                .catch(function() {
+                    window.location.replace(fallbackPath);
+                });
+        })();
+    </script>
+</head>
+<body>
+    <p>Loading...</p>
+</body>
+</html>
