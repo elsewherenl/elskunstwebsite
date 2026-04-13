@@ -751,7 +751,8 @@ figcaption .overlay-size {
     margin-bottom: 14px;
 }
 
-.about-intro h1 {
+.about-intro h1,
+.opdrachten-title {
     font-size: clamp(2rem, 4vw, 3.2rem);
     font-weight: 600;
     color: #1f1a17;
@@ -773,6 +774,24 @@ figcaption .overlay-size {
 }
 
 .about-photo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.opdrachten-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.opdrachten-row-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.opdrachten-row-3 {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 16px;
@@ -977,6 +996,11 @@ figcaption .overlay-size {
     }
 
     .about-photo-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .opdrachten-row-2,
+    .opdrachten-row-3 {
         grid-template-columns: 1fr;
     }
 }
