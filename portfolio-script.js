@@ -334,15 +334,31 @@ function renderPortfolioGrid(artworks) {
 
         const caption = document.createElement('figcaption');
 
-        const titleSpan = document.createElement('div');
+        const titleRow = document.createElement('div');
+        titleRow.className = 'overlay-title-row';
+
+        const titleSpan = document.createElement('span');
         titleSpan.className = 'overlay-title';
         titleSpan.textContent = artwork.Titel || 'Untitled';
+
+        titleRow.appendChild(titleSpan);
+
+        const rawPrice = artwork.Prijs;
+        if (rawPrice) {
+            const priceNum = parseFloat(String(rawPrice).replace(/[^0-9.]/g, ''));
+            if (!isNaN(priceNum)) {
+                const priceSpan = document.createElement('span');
+                priceSpan.className = 'overlay-price';
+                priceSpan.textContent = `(€${priceNum % 1 === 0 ? priceNum.toFixed(0) : priceNum.toFixed(2)})`;
+                titleRow.appendChild(priceSpan);
+            }
+        }
 
         const sizeSpan = document.createElement('div');
         sizeSpan.className = 'overlay-size';
         sizeSpan.textContent = artwork['Maat (HxB) in cm'] ? `${artwork['Maat (HxB) in cm']} cm` : '';
 
-        caption.appendChild(titleSpan);
+        caption.appendChild(titleRow);
         caption.appendChild(sizeSpan);
 
         link.appendChild(img);
@@ -649,12 +665,21 @@ function updateGalleryContent() {
     const fullscreenImage = document.getElementById('fullscreenImage');
     const captionTitle = document.getElementById('captionTitle');
     const captionSize = document.getElementById('captionSize');
+    const captionPrice = document.getElementById('captionPrice');
     const viewInRoomModalBtn = ensureModalViewButton();
     if (!fullscreenImage || !captionTitle || !captionSize) return;
 
     fullscreenImage.src = getDriveImageUrl(artwork.Image);
     captionTitle.textContent = artwork.Titel || 'Untitled';
     captionSize.textContent = artwork['Maat (HxB) in cm'] ? `${artwork['Maat (HxB) in cm']} cm` : '';
+
+    if (captionPrice) {
+        const rawPrice = artwork.Prijs;
+        const priceNum = rawPrice ? parseFloat(String(rawPrice).replace(/[^0-9.]/g, '')) : NaN;
+        captionPrice.textContent = !isNaN(priceNum)
+            ? `(€${priceNum % 1 === 0 ? priceNum.toFixed(0) : priceNum.toFixed(2)})`
+            : '';
+    }
 
     if (viewInRoomModalBtn) {
         viewInRoomModalBtn.setAttribute('aria-label', `View ${artwork.Titel || 'artwork'} in room`);
