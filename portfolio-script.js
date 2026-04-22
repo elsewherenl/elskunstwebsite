@@ -397,9 +397,11 @@ function populateColourFilter(artworks) {
 
 function populateThemeFilter(artworks) {
     const themes = [...new Set(
-        artworks
-            .map(artwork => String(artwork.Thema || '').trim())
-            .filter(Boolean)
+        artworks.flatMap(artwork =>
+            ['Thema', 'Thema 2', 'Thema 3', 'Thema 4']
+                .map(k => String(artwork[k] || '').trim())
+                .filter(Boolean)
+        )
     )].sort((a, b) => a.localeCompare(b));
 
     themes.forEach(theme => {
@@ -440,7 +442,8 @@ function applyPortfolioFilters() {
     const filtered = allPortfolioArtworks.filter(artwork => {
         const sizeMatch = sizeValues.length === 0 || sizeValues.includes(getSizeBucket(artwork['Maat (HxB) in cm']));
         const colourMatch = colourValues.length === 0 || colourValues.some(c => getArtworkColours(artwork.Kleuren).includes(c));
-        const themeMatch = themeValues.length === 0 || themeValues.includes(String(artwork.Thema || '').trim());
+        const artworkThemes = ['Thema', 'Thema 2', 'Thema 3', 'Thema 4'].map(k => String(artwork[k] || '').trim()).filter(Boolean);
+        const themeMatch = themeValues.length === 0 || themeValues.some(t => artworkThemes.includes(t));
         const priceMatch = priceValues.length === 0 || priceValues.includes(getPriceBucket(artwork.Prijs));
         return sizeMatch && colourMatch && themeMatch && priceMatch;
     });
@@ -514,7 +517,10 @@ async function loadPortfolio() {
         const response = await fetch('portfolio.json');
         const artworks = await response.json();
 
-        const artworksWithImages = artworks.filter(art => art.Image && String(art.Image).trim() !== '');
+        const artworksWithImages = artworks.filter(art =>
+            art.Image && String(art.Image).trim() !== '' &&
+            String(art.Conditie || '').trim().toUpperCase() !== 'D'
+        );
 
         if (getPortfolioMode() === 'all') {
             allPortfolioArtworks = sortByHeightDesc(artworksWithImages);
