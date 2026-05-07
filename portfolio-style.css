@@ -855,8 +855,8 @@ figcaption .overlay-size {
 
 .about-panel {
     display: grid;
-    grid-template-columns: minmax(300px, 560px) 1fr;
-    gap: 100px;
+    grid-template-columns: minmax(300px, 460px) 1fr;
+    gap: 60px;
     align-items: start;
 }
 
