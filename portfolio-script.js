@@ -25,19 +25,19 @@ const ROOM_PREVIEW_CONFIG = {
 };
 
 const COLOUR_RULES = [
-    { value: 'blue', label: 'Blue', patterns: [/\bblue\b/i, /\bblauw\b/i, /turq?oise/i, /light blue/i, /bluem/i] },
-    { value: 'green', label: 'Green', patterns: [/\bgreen\b/i, /\bgroen\b/i, /\bgree+n?\b/i] },
-    { value: 'red', label: 'Red', patterns: [/\bred\b/i, /\brood\b/i] },
-    { value: 'yellow', label: 'Yellow', patterns: [/\byellow\b/i, /\bgeel\b/i] },
-    { value: 'orange', label: 'Orange', patterns: [/\borange\b/i, /\boranje\b/i, /\bzalm\b/i] },
-    { value: 'brown', label: 'Brown', patterns: [/\bbrown\b/i, /\bbruin\b/i] },
-    { value: 'purple', label: 'Purple', patterns: [/\bpurple\b/i, /\bpaars\b/i, /\blilac\b/i] },
-    { value: 'pink', label: 'Pink', patterns: [/\bpink\b/i, /\broze\b/i, /\brose\b/i] },
-    { value: 'black', label: 'Black', patterns: [/\bblack\b/i, /\bzwart\b/i] },
-    { value: 'white', label: 'White', patterns: [/\bwhite\b/i, /\bwit\b/i, /\bcream\b/i] },
-    { value: 'grey', label: 'Grey', patterns: [/\bgrey\b/i, /\bgrijs\b/i] },
+    { value: 'blue', label: 'Blauw', patterns: [/\bblue\b/i, /\bblauw\b/i, /turq?oise/i, /light blue/i, /bluem/i] },
+    { value: 'green', label: 'Groen', patterns: [/\bgreen\b/i, /\bgroen\b/i, /\bgree+n?\b/i] },
+    { value: 'red', label: 'Rood', patterns: [/\bred\b/i, /\brood\b/i] },
+    { value: 'yellow', label: 'Geel', patterns: [/\byellow\b/i, /\bgeel\b/i] },
+    { value: 'orange', label: 'Oranje', patterns: [/\borange\b/i, /\boranje\b/i, /\bzalm\b/i] },
+    { value: 'brown', label: 'Bruin', patterns: [/\bbrown\b/i, /\bbruin\b/i] },
+    { value: 'purple', label: 'Paars', patterns: [/\bpurple\b/i, /\bpaars\b/i, /\blilac\b/i] },
+    { value: 'pink', label: 'Roze', patterns: [/\bpink\b/i, /\broze\b/i, /\brose\b/i] },
+    { value: 'black', label: 'Zwart', patterns: [/\bblack\b/i, /\bzwart\b/i] },
+    { value: 'white', label: 'Wit', patterns: [/\bwhite\b/i, /\bwit\b/i, /\bcream\b/i] },
+    { value: 'grey', label: 'Grijs', patterns: [/\bgrey\b/i, /\bgrijs\b/i] },
     { value: 'beige', label: 'Beige', patterns: [/\bbeige\b/i] },
-    { value: 'gold', label: 'Gold', patterns: [/\bgold\b/i] }
+    { value: 'gold', label: 'Goud', patterns: [/\bgold\b/i] }
 ];
 
 function getPortfolioMode() {
