@@ -438,6 +438,7 @@ function applyPortfolioFilters() {
     const colourValues = getCheckedValues('colorDropdown');
     const themeValues = getCheckedValues('themeDropdown');
     const priceValues = getCheckedValues('priceDropdown');
+    const searchQuery = (document.getElementById('searchInput')?.value || '').trim().toLowerCase();
 
     const filtered = allPortfolioArtworks.filter(artwork => {
         const sizeMatch = sizeValues.length === 0 || sizeValues.includes(getSizeBucket(artwork['Maat (HxB) in cm']));
@@ -445,7 +446,8 @@ function applyPortfolioFilters() {
         const artworkThemes = ['Thema', 'Thema 2', 'Thema 3', 'Thema 4'].map(k => String(artwork[k] || '').trim()).filter(Boolean);
         const themeMatch = themeValues.length === 0 || themeValues.some(t => artworkThemes.includes(t));
         const priceMatch = priceValues.length === 0 || priceValues.includes(getPriceBucket(artwork.Prijs));
-        return sizeMatch && colourMatch && themeMatch && priceMatch;
+        const searchMatch = !searchQuery || String(artwork.Titel || '').toLowerCase().includes(searchQuery);
+        return sizeMatch && colourMatch && themeMatch && priceMatch && searchMatch;
     });
 
     renderPortfolioGrid(filtered);
@@ -481,6 +483,11 @@ function setupPortfolioFilters() {
     setupCustomDropdown('themeDropdown', "Alle thema's");
     setupCustomDropdown('priceDropdown', 'Alle prijzen');
 
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+        searchInput.addEventListener('input', applyPortfolioFilters);
+    }
+
     document.addEventListener('click', () => {
         document.querySelectorAll('.custom-dropdown.open').forEach(d => {
             d.classList.remove('open');
@@ -500,6 +507,8 @@ function setupPortfolioFilters() {
             updateDropdownLabel('colorDropdown', 'Alle kleuren');
             updateDropdownLabel('themeDropdown', "Alle thema's");
             updateDropdownLabel('priceDropdown', 'Alle prijzen');
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) searchInput.value = '';
             history.replaceState(null, '', window.location.pathname);
             applyPortfolioFilters();
         });
@@ -611,14 +620,17 @@ function initializeLazyLoading() {
 // Back to top button functionality
 window.addEventListener('scroll', () => {
     const btn = document.getElementById('backToTop');
-    if (!btn) return;
+    if (btn) {
+        if (window.pageYOffset > 300) {
+            btn.classList.add('visible');
+        } else {
+            btn.classList.remove('visible');
+        }
+    }
 
-    const scrolled = window.pageYOffset;
-
-    if (scrolled > 300) {
-        btn.classList.add('visible');
-    } else {
-        btn.classList.remove('visible');
+    const scrollHint = document.getElementById('scrollHint');
+    if (scrollHint && window.pageYOffset > 60) {
+        scrollHint.classList.add('hidden');
     }
 });
 
