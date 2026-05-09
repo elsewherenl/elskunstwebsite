@@ -280,20 +280,40 @@ body {
 .scroll-hint {
     display: none;
     position: fixed;
-    bottom: 30px;
+    bottom: 28px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 1.6rem;
-    color: #95392E;
-    opacity: 0.8;
-    animation: bounce 1.5s infinite;
     z-index: 999;
     pointer-events: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.scroll-hint-text {
+    background: #95392E;
+    color: #F3EFE9;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.45rem 1.1rem;
+    border-radius: 999px;
+    white-space: nowrap;
+    opacity: 0.92;
+}
+
+.scroll-hint-arrow {
+    font-size: 1.2rem;
+    color: #95392E;
+    animation: bounce 1.5s ease-in-out infinite;
+    display: block;
+    text-align: center;
 }
 
 @media (max-width: 768px) {
     .scroll-hint {
-        display: block;
+        display: flex;
     }
     .scroll-hint.hidden {
         display: none;
@@ -301,8 +321,8 @@ body {
 }
 
 @keyframes bounce {
-    0%, 100% { transform: translateX(-50%) translateY(0); }
-    50%       { transform: translateX(-50%) translateY(8px); }
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(6px); }
 }
 
 /* Back to Top Button */
