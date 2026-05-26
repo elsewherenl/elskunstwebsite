@@ -671,7 +671,7 @@ figcaption .overlay-size {
     margin-top: 34px;
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-end;
+    align-items: flex-start;
     gap: 20px;
 }
 
@@ -698,7 +698,7 @@ figcaption .overlay-size {
 .dropdown-trigger {
     width: 100%;
     padding: 0.82rem 2.25rem 0.82rem 1rem;
-    border-radius: 999px;
+    border-radius: 6px;
     border: 1px solid rgba(149, 57, 46, 0.5);
     background-color: #F3EFE9;
     color: #2f2a27;
@@ -777,7 +777,7 @@ figcaption .overlay-size {
 .search-input {
     width: 100%;
     padding: 0.82rem 1rem;
-    border-radius: 999px;
+    border-radius: 6px;
     border: 1px solid rgba(149, 57, 46, 0.5);
     background-color: #F3EFE9;
     color: #2f2a27;
@@ -794,7 +794,7 @@ figcaption .overlay-size {
 
 .filter-reset-btn {
     padding: 0.82rem 1.4rem;
-    border-radius: 999px;
+    border-radius: 6px;
     border: 1px solid rgba(149, 57, 46, 0.5);
     background-color: #F3EFE9;
     color: #95392E;
@@ -803,6 +803,7 @@ figcaption .overlay-size {
     cursor: pointer;
     letter-spacing: 0.04em;
     transition: background-color 0.2s, color 0.2s;
+    margin-top: calc(0.72rem + 8px);
 }
 
 .filter-reset-btn:hover {
