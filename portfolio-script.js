@@ -438,6 +438,7 @@ function applyPortfolioFilters() {
     const colourValues = getCheckedValues('colorDropdown');
     const themeValues = getCheckedValues('themeDropdown');
     const priceValues = getCheckedValues('priceDropdown');
+    const brochureValues = getCheckedValues('brochureDropdown');
     const searchQuery = (document.getElementById('searchInput')?.value || '').trim().toLowerCase();
 
     const filtered = allPortfolioArtworks.filter(artwork => {
@@ -447,7 +448,9 @@ function applyPortfolioFilters() {
         const themeMatch = themeValues.length === 0 || themeValues.some(t => artworkThemes.includes(t));
         const priceMatch = priceValues.length === 0 || priceValues.includes(getPriceBucket(artwork.Prijs));
         const searchMatch = !searchQuery || String(artwork.Titel || '').toLowerCase().includes(searchQuery);
-        return sizeMatch && colourMatch && themeMatch && priceMatch && searchMatch;
+        const inBrochure = String(artwork['column_24'] || '').trim().toLowerCase() === 'ja';
+        const brochureMatch = brochureValues.length === 0 || (brochureValues.includes('ja') && inBrochure) || (brochureValues.includes('nee') && !inBrochure);
+        return sizeMatch && colourMatch && themeMatch && priceMatch && searchMatch && brochureMatch;
     });
 
     renderPortfolioGrid(filtered);
@@ -482,6 +485,7 @@ function setupPortfolioFilters() {
     setupCustomDropdown('colorDropdown', 'Alle kleuren');
     setupCustomDropdown('themeDropdown', "Alle thema's");
     setupCustomDropdown('priceDropdown', 'Alle prijzen');
+    setupCustomDropdown('brochureDropdown', 'Alle');
 
     const searchInput = document.getElementById('searchInput');
     if (searchInput) {
@@ -498,7 +502,7 @@ function setupPortfolioFilters() {
     const resetBtn = document.getElementById('resetFilters');
     if (resetBtn && !resetBtn.dataset.bound) {
         resetBtn.addEventListener('click', () => {
-            ['sizeDropdown', 'colorDropdown', 'themeDropdown', 'priceDropdown'].forEach(id => {
+            ['sizeDropdown', 'colorDropdown', 'themeDropdown', 'priceDropdown', 'brochureDropdown'].forEach(id => {
                 const dropdown = document.getElementById(id);
                 if (!dropdown) return;
                 dropdown.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = false);
@@ -507,6 +511,7 @@ function setupPortfolioFilters() {
             updateDropdownLabel('colorDropdown', 'Alle kleuren');
             updateDropdownLabel('themeDropdown', "Alle thema's");
             updateDropdownLabel('priceDropdown', 'Alle prijzen');
+            updateDropdownLabel('brochureDropdown', 'Alle');
             const searchInput = document.getElementById('searchInput');
             if (searchInput) searchInput.value = '';
             history.replaceState(null, '', window.location.pathname);
