@@ -413,6 +413,11 @@ figcaption .overlay-price {
     flex-shrink: 0;
 }
 
+figcaption .overlay-price--sold {
+    font-style: italic;
+    opacity: 0.75;
+}
+
 figcaption .overlay-size {
     font-size: 0.95rem;
     font-weight: 300;
@@ -525,6 +530,11 @@ figcaption .overlay-size {
     font-size: 1.2rem;
     font-weight: 400;
     color: rgba(255, 255, 255, 0.85);
+}
+
+.fullscreen-caption .caption-price--sold {
+    font-style: italic;
+    opacity: 0.75;
 }
 
 .fullscreen-caption .caption-size {
