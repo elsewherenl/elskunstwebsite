@@ -343,16 +343,20 @@ function renderPortfolioGrid(artworks) {
 
         titleRow.appendChild(titleSpan);
 
+        const isSold = artwork.Beschikbaar !== 'Ja';
         const rawPrice = artwork.Prijs;
-        if (rawPrice) {
+        const priceSpan = document.createElement('span');
+        priceSpan.className = 'overlay-price';
+        if (isSold) {
+            priceSpan.textContent = 'Verkocht';
+            priceSpan.classList.add('overlay-price--sold');
+        } else if (rawPrice) {
             const priceNum = parseFloat(String(rawPrice).replace(/[^0-9.]/g, ''));
             if (!isNaN(priceNum)) {
-                const priceSpan = document.createElement('span');
-                priceSpan.className = 'overlay-price';
                 priceSpan.textContent = `(€${priceNum % 1 === 0 ? priceNum.toFixed(0) : priceNum.toFixed(2)})`;
-                titleRow.appendChild(priceSpan);
             }
         }
+        if (priceSpan.textContent) titleRow.appendChild(priceSpan);
 
         const sizeSpan = document.createElement('div');
         sizeSpan.className = 'overlay-size';
@@ -697,11 +701,17 @@ function updateGalleryContent() {
     captionSize.textContent = artwork['Maat (HxB) in cm'] ? `${artwork['Maat (HxB) in cm']} cm` : '';
 
     if (captionPrice) {
-        const rawPrice = artwork.Prijs;
-        const priceNum = rawPrice ? parseFloat(String(rawPrice).replace(/[^0-9.]/g, '')) : NaN;
-        captionPrice.textContent = !isNaN(priceNum)
-            ? `(€${priceNum % 1 === 0 ? priceNum.toFixed(0) : priceNum.toFixed(2)})`
-            : '';
+        if (artwork.Beschikbaar !== 'Ja') {
+            captionPrice.textContent = 'Verkocht';
+            captionPrice.classList.add('caption-price--sold');
+        } else {
+            captionPrice.classList.remove('caption-price--sold');
+            const rawPrice = artwork.Prijs;
+            const priceNum = rawPrice ? parseFloat(String(rawPrice).replace(/[^0-9.]/g, '')) : NaN;
+            captionPrice.textContent = !isNaN(priceNum)
+                ? `(€${priceNum % 1 === 0 ? priceNum.toFixed(0) : priceNum.toFixed(2)})`
+                : '';
+        }
     }
 
     if (viewInRoomModalBtn) {
